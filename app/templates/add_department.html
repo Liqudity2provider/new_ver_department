@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+{% block content %}
+    <br>
+        <h1 class="text-center">Add department</h1>
+    <br>
+        <form class="text-center" action="/add_department" method="POST">
+            <div class="form-group">
+                <label for="name">Department name:</label>
+                <input id="name" name="name" placeholder="Department name" required="1" maxlength="25">
+            </div>
+                <button type="submit" class="btn btn-success" id="confirm">Confirm</button>
+                <a href="{{ url_for('departments_page') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+{% endblock %}

@@ -1,0 +1,172 @@
+Departments and Empoyees
+
+Vision
+“Managing Departments and Employees” is web-application which
+allows users to view and record information about departments and employees of
+company.
+Application provides:
+ Storing information about departments and employees in a database;
+ Display list of departments;
+ Updating the list of departments (adding, editing, removing);
+ Display list of employees;
+ Updating the list of employees (adding, editing, removing);
+ Display information about department;
+ Updating information about department (editing, removing);
+ Display information about employee;
+ Updating information about employee (editing, removing);
+ Display average salary for departments;
+ Filtering by employees date of birth.
+1. Departments
+1.1 Display list of departments
+This page is designed to view the list of departments and average salary of
+each department.
+
+Main scenario:
+ User opens “Departments” page;
+ Application displays list of departments.
+The list displays the following columns:
+ Department name – unique department name;
+ Average salary – average salary of department.
+Aggregate function: Average salary = Summary department salary /
+Employees quantity
+
+1.2 Add department
+Main scenario:
+ User clicks the “Add” button in the departments list page;
+ Application displays form to enter department data;
+ User enters department data and presses “Confirm” button;
+ If any data is entered incorrectly, incorrect data messages are
+displayed;
+ If entered data is valid, then record is adding to database;
+ If error occurs, then error message is displaying;
+ If new department record is successfully added, then list of
+departments with added records is displaying.
+Cancel operation scenario:
+ User clicks the “Add” button in the department list view page;
+ Application displays form to enter department data
+ User enters department data and presses “Cancel” button;
+ Data don’t save in database, then list of departments records is
+displaying to user.
+ If the user selects the menu item “Department”, “Employees” or link
+to department, the data will not be saved to the database and
+corresponding form with updated data will be opened.
+
+When adding a department, the following details are entered:
+ Department name – department name;
+
+
+1.3 Edit Department
+Main scenario:
+ User clicks the “Edit” button in the departments list page;
+ Application displays form to enter department data;
+ User enters department data and presses “Confirm” button;
+ If any data is entered incorrectly, incorrect data messages are
+displayed;
+ If entered data is valid, then edited data is updating in database;
+ If error occurs, then error message is displaying;
+ If department record is successfully edited, then list of departments
+with updated record is displaying.Cancel operation scenario:
+ User clicks the “Edit” button in the department list view page;
+ Application displays form to enter department data;
+ User enters department data and presses “Cancel” button;
+ Data don’t save in database, then list of departments records is
+displaying to user.
+ If the user selects the menu item “Department”, “Employees” or link
+to department, the data will not be saved to the database and
+corresponding form with updated data will be opened.
+
+When editing a department, the following details are entered:
+ Department name – department name;
+
+1.4 Removing the department
+Main scenario:User presses the “Delete” button in the selected department line;
+If the department can be removed a confirmation dialog is displayed;
+Record is deleted from database;
+If error occurs, then error message displays;
+If department record is successfully deleted, then list of department without
+deleted records is displaying
+
+Cancel operation scenario:
+ User is in display mode of departments list and press “Delete” button;
+ Application displays confirmation dialog “Are You sure You want to
+delete this department?”;
+ User press “Cancel” button;
+ List of departments displaying without changes
+
+
+
+2. Employees
+2.1 Display list of Employees
+This page is intended for viewing and editing the employees list.
+Main scenario:
+ User opens “Employees” page;
+ Application displays list of employees
+
+The list displays the following columns:
+ Name – employee full name;
+ Department – employee department;
+ Salary – employee salary;
+ Date of Birth – employee birth day
+
+2.2 Add employee
+Main scenario:
+ User clicks the “Add button” in the employees list page;
+ Application displays form to enter employee data;
+ User enters employee data and press “Confirm” button;
+ If any data is entered incorrectly, incorrect data message is displayed;
+ If entered data is valid, then record is adding to database;
+ If error occurs, then error message is displaying;
+ If new employee record is successfully added, then employees list with
+added records is displaying.
+Cancel operation scenario:
+User clicks the “Add” button in the employees list page;
+Application displays form enter employees data;
+User enters employee data and press “Cancel” button;
+Data don’t save in database, then employees list records is displaying to user;
+If the user clicks on “Home”, “Departments” or “Employees” button the data
+will not be saved to the database and the corresponding form with updated data
+will be opened
+
+When adding employee, the following details are entered:
+ Related department – department name for employee;
+ Employee name – employee full name;
+ Data of birth – employee date of birth;
+ Salary – employee salary;
+
+2.3 Edit employeeMain scenario:
+ User clicks the “Edit” button in the employee list page;
+ Application displays form to enter employee data;
+ User enters employee data and press “Confirm” button;
+ If any data is entered incorrectly, incorrect data message is displayed;
+ If entered data is valid, then edited data is added to database;
+ If error occurs, then error message is displaying;
+ If employee record is successfully edited, then employees list with
+added record is displaying.
+
+Cancel operation scenario:
+ User clicks the “Edit” button in the employees list view page;
+ Application displays form to enter employee data;
+ User enters employee data and press “Cancel” button;
+ Data don’t save in database, then employees list records is displaying
+to user;
+ If the user clicks the “Home”, “Departments” or “Employees” button
+the data will not be saved to the database and the corresponding form
+with updated data will be opened
+
+2.4 Removing employee
+Main scenario:
+ The user clicks “Delete” button on employees list page;
+ Application displays confirmation dialog “Are You sure You want to delete
+this employee?”;
+ The user confirms the removal of the employee;
+ Record is deleted from database;
+ If error occurs, then error message displays;
+ If employee record is successfully deleted, then list employees list without
+deleted record is displaying
+
+Cancel operation scenario:
+ User is in display mode of employees list and press “Delete” button;
+ Application displays confirmation dialog “Are You sure You want to
+delete this employee?”;
+ User press “Cancel” button;
+ Employees list without changes is displaying.

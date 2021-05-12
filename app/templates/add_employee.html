@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+{% block content %}
+    <br>
+        <h1 class="text-center">Add employee</h1>
+    <br>
+        <form class="text-center" action="/add_employee" method="POST">
+            <div class="form-group">
+                <label>Employee name:</label>
+                <input id="name" name="name" placeholder="Full name" required="1" max="40">
+            </div>
+            <div>
+                {% if departments %}
+                    <label>Related department:</label>
+                    <select id="related_department_id" name="related_department_id">
+                    {% for department in departments %}
+                    <option value="{{ department.id }}" required="1">{{ department.name }}</option>
+                    {% endfor %}
+                    </select>
+                {% else %}
+                     <p>Departments not exist</p>
+                {% endif %}
+            </div>
+            <div>
+                <label>Date of birth:</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" max="{{ today }}" required="1">
+            </div>
+            <div>
+                <label>Salary:</label>
+                <input type="number" id="salary" name="salary" min="1000" placeholder="$1000" required="1">
+            </div>
+            <br>
+                <button id="confirm" type="submit" class="btn btn-success">Confirm</button>
+                <a href="{{ url_for('employees_page') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+{% endblock %}

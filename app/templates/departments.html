@@ -1,0 +1,66 @@
+{% extends 'home.html' %}
+{% block content %}
+
+        <br>
+            <h1 class="text-center">Departments</h1>
+            <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="text-center text-danger" class=flashes>
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                    {% elif category == 'success' %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+            <a href="{{ url_for('add_department') }}" class="btn btn-success" id="add department">Add department</a><br>
+        <br>
+            <div class="text-center">
+    {% if departments %}
+        <table class="table table-striped table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Average Salary</th>
+                    <th scope="col" class="text-secondary">Edit</th>
+                    <th scope="col" class="text-danger">Delete</th>
+                </tr>
+            </thead>
+        <tbody>
+            {% for department in departments %}
+                <tr>
+                    <td><a name="{{ department.name }}" href="{{ url_for('department_page', department_id=department.id) }}">{{ department.name }}</a></td>
+                    <td>
+                        {% if average_salary[department.id] %}
+                            ${{ average_salary[department.id]|round }}
+                        {% else %}
+                            $0
+                        {% endif %}
+                    </td>
+                    <td class="text-secondary"><a id="edit {{ department.name }}" href="{{ url_for('edit_department', department_id=department.id) }}" class="btn btn-warning"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg></a>
+                    </td>
+                    <td>
+                        <a id="delete {{ department.name }}" href="{{ url_for('delete_department', department_id=department.id) }}" class="btn btn-danger" role="button" onclick="return confirm('Are You sure You want to delete {{ department.name }} department?')"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+  <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+</svg></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
+    </div>
+{% endblock %}
+
+

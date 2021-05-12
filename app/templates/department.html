@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+{% block content %}
+    <br>
+    <div class="text-center">
+<h1 class="text-center">{{ department.name }} department page</h1>
+    <br>
+    <br>
+<p class="text-center">Department name: {{ department.name }}</p>
+<p class="text-center">
+    Average department salary:
+    {% if average_salary[department.id] %}
+    ${{ average_salary[department.id]|round }}
+    {% else %}
+        $0
+    {% endif %}
+</p>
+<p class="text-center">Total department salary:
+    {% if total_salary[department.id] %}
+    ${{ total_salary[department.id]|round  }}</p>
+    {% else %}
+    $0
+    {% endif %}
+<p class="text-center">Employees quantity: {{ department.employees.count() }}</p>
+    <br>
+    <div class="text-center">
+    <a id="edit" href="{{ url_for('edit_department', department_id=department.id) }}" class="btn btn-warning">Edit department</a>
+    <a id="delete" href="{{ url_for('delete_department', department_id=department.id) }}" class="btn btn-danger" role="button" onclick="return confirm('Are You sure You want to delete {{ department.name }} department?')">Delete</a>
+    </div>
+    </div>
+{% endblock %}
