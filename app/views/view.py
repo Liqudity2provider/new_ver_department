@@ -13,12 +13,6 @@ def dateformat(value, format='%B %d, %Y'):
     return value.strftime(format)
 
 
-@app.route('/test')
-def test():
-    """route for test"""
-    return 'test'
-
-
 @app.route('/')
 @app.route('/home')
 def home():
@@ -60,12 +54,12 @@ def department_page(department_id):
     average_salary = EmployeeModel.query.with_entities(EmployeeModel.related_department_id, func.avg(
         EmployeeModel.salary)).group_by(
         EmployeeModel.related_department_id).all()
-    average_salary = dict((key, value) for key, value in average_salary)
+    average_salary = dict((key, value)for key, value in average_salary)
 
     total_salary = EmployeeModel.query.with_entities(EmployeeModel.related_department_id, func.sum(
         EmployeeModel.salary)).group_by(
         EmployeeModel.related_department_id).all()
-    total_salary = dict((key, value) for key, value in total_salary)
+    total_salary = dict((key, value)for key, value in total_salary)
 
     return render_template(
         'department.html',
