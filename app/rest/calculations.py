@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from sqlalchemy.sql import func
-
+import datetime
 from app.models.models import EmployeeModel, DepartmentSchema, EmployeeSchema
 from app import db
 
@@ -8,6 +8,10 @@ department_schema = DepartmentSchema()
 departments_schema = DepartmentSchema(many=True)
 employee_schema = EmployeeSchema()
 employees_schema = EmployeeSchema(many=True)
+
+
+def string_format(str_time):
+    return datetime.datetime.strptime(str_time, '%Y:%m:%d')
 
 
 class DateFilter(Resource):
@@ -22,6 +26,7 @@ class DateFilter(Resource):
 
 class CertainDateFilter(Resource):
     """Filter employees from certain date"""
+
     def get(self, date):
         """List employees from certain date"""
         employees = EmployeeModel.query.filter(EmployeeModel.date_of_birth == date)

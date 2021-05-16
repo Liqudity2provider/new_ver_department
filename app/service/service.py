@@ -90,7 +90,6 @@ def add_employee_post():
         }
         response = requests.post(path + '/api/employees', headers=headers, data=json.dumps(new_employee))
         output = json.loads(response.text)
-
         if output.get('error'):
             flash(output['error'], 'error')
         else:

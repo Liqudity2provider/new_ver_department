@@ -32,7 +32,7 @@ class ApiTest(TestBase):
         "name": "Test employee",
         "salary": "5555",
         "related_department_id": "1",
-        "date_of_birth": "981111"
+        "date_of_birth": "1998:11:11"
     }
 
     EMPLOYEE_OBJECT_LOW_SALARY_TEST = {
@@ -53,7 +53,7 @@ class ApiTest(TestBase):
         "name": "Update employee",
         "salary": "6666",
         "related_department_id": "1",
-        "date_of_birth": "991212"
+        "date_of_birth": "1999:12:12"
     }
 
     DATE_EMPLOYEE = {
@@ -155,7 +155,7 @@ class ApiTest(TestBase):
         """Create employee test"""
 
         self.app.post(ApiTest.DEPARTMENTS_URL, headers=ApiTest.HEADERS,
-                      data=json.dumps(ApiTest.DEPARTMENTS_URL))
+                      data=json.dumps(ApiTest.DEPARTMENT_OBJECT_TEST))
         response = self.app.post(ApiTest.EMPLOYEES_URL, headers=ApiTest.HEADERS,
                                  data=json.dumps(ApiTest.EMPLOYEE_OBJECT_TEST))
         self.assertEqual(response.status_code, 201)
@@ -166,14 +166,6 @@ class ApiTest(TestBase):
                                  data=json.dumps(ApiTest.EMPLOYEE_OBJECT_LOW_SALARY_TEST))
         output = json.loads(response.data)
         expected_response = {"error": "Minimum salary for employee must be more than $1000"}
-        self.assertEqual(output, expected_response)
-
-    def test_13_post_employee_wrong_input(self):
-        """Create employee with wrong input data"""
-        response = self.app.post(ApiTest.EMPLOYEES_URL, headers=ApiTest.HEADERS,
-                                 data=json.dumps(ApiTest.EMPLOYEE_OBJECT_WRONG_DATE_TEST))
-        output = json.loads(response.data)
-        expected_response = {"error": "Incorrect value enter error"}
         self.assertEqual(output, expected_response)
 
     def test_14_get_employee(self):
@@ -215,17 +207,14 @@ class ApiTest(TestBase):
         output = json.loads(response_undo.data)
         self.assertEqual(output['name'], 'Adam Barness')
 
-
     def test_17_update_employee_wrong_input(self):
         """Update employee with wrong input error test"""
-        self.app.post(ApiTest.DEPARTMENTS_URL, headers=ApiTest.HEADERS,
-                      data=json.dumps(ApiTest.DEPARTMENT_OBJECT_TEST))
-        self.app.post(ApiTest.EMPLOYEES_URL, headers=ApiTest.HEADERS,
-                      data=json.dumps(ApiTest.EMPLOYEE_OBJECT_TEST))
+
         response = self.app.put(ApiTest.EMPLOYEES_URL + '/1', headers=ApiTest.HEADERS,
                                 data=json.dumps(ApiTest.EMPLOYEE_OBJECT_WRONG_DATE_TEST))
         output = json.loads(response.data)
-        expected_response = {"error": "Incorrect data entered"}
+        expected_response = {
+            "message": "The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."}
         self.assertEqual(output, expected_response)
 
     def test_18_delete_employee(self):
@@ -253,22 +242,14 @@ class ApiTest(TestBase):
                       data=json.dumps(ApiTest.EMPLOYEE_OBJECT_TEST))
         self.app.post(ApiTest.EMPLOYEES_URL, headers=ApiTest.HEADERS,
                       data=json.dumps(ApiTest.UPDATE_EMPLOYEE))
-        response = self.app.get(ApiTest.DATE_FILTER_RANGE_URL + '970101-000101')
-        expected_output = [{
-            "name": "Test employee",
-            "salary": 5555.0,
-            "related_department_id": 1,
-            "date_of_birth": "1998-11-11",
-            "id": 1
-        },
-            {
-                "name": "Update employee",
-                "salary": 6666.0,
-                "related_department_id": 1,
-                "date_of_birth": "1999-12-12",
-                "id": 2
-            }
-        ]
+        response = self.app.get(ApiTest.DATE_FILTER_RANGE_URL + '1998:11:17-2000:01:01')
+
+        expected_output = [{'date_of_birth': '1999:12:12',
+                            'id': 2,
+                            'name': 'Update employee',
+                            'related_department_id': 1,
+                            'salary': 6666.0}
+                           ]
         output = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(output, expected_output)
@@ -279,13 +260,13 @@ class ApiTest(TestBase):
                       data=json.dumps(ApiTest.DEPARTMENT_OBJECT_TEST))
         self.app.post(ApiTest.EMPLOYEES_URL, headers=ApiTest.HEADERS,
                       data=json.dumps(ApiTest.EMPLOYEE_OBJECT_TEST))
-        response = self.app.get(ApiTest.DATE_FILTER_URL + '981111')
+        response = self.app.get(ApiTest.DATE_FILTER_URL + '1998:11:11')
         output = json.loads(response.data)
         expected_output = [{
             "name": "Test employee",
             "salary": 5555.0,
             "related_department_id": 1,
-            "date_of_birth": "1998-11-11",
+            "date_of_birth": "1998:11:11",
             "id": 1
         }]
         self.assertEqual(response.status_code, 200)
@@ -337,10 +318,10 @@ class ViewsTest(TestBase):
 
     def test_department_page(self):
         """Test access to department page"""
-        # self.app.post(ApiTest.DEPARTMENTS_URL, headers=ApiTest.HEADERS,
-        #               data=json.dumps(ApiTest.DEPARTMENT_OBJECT_TEST))
-        # self.app.post(ApiTest.EMPLOYEES_URL, headers=ApiTest.HEADERS,
-        #               data=json.dumps(ApiTest.EMPLOYEE_OBJECT_TEST))
+        self.app.post(ApiTest.DEPARTMENTS_URL, headers=ApiTest.HEADERS,
+                      data=json.dumps(ApiTest.DEPARTMENT_OBJECT_TEST))
+        self.app.post(ApiTest.EMPLOYEES_URL, headers=ApiTest.HEADERS,
+                      data=json.dumps(ApiTest.EMPLOYEE_OBJECT_TEST))
 
         response = self.app.get(ViewsTest.URL + '/departments/1')
         self.assertEqual(response.status_code, 200)

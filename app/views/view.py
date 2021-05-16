@@ -10,7 +10,7 @@ from app.models.models import DepartmentModel, EmployeeModel
 @app.template_filter('dateformat')
 def dateformat(value, format='%B %d, %Y'):
     """Format function for date"""
-    return value.strftime(format)
+    return value
 
 
 @app.route('/')
@@ -79,6 +79,7 @@ def employees_page():
     if request.method == 'POST':
         date_from = request.form['date_from']
         date_by = request.form['date_by']
+
         if date_from and date_by:
             employees = EmployeeModel.query.filter(EmployeeModel.date_of_birth <= date_by).filter(
                 EmployeeModel.date_of_birth >= date_from)
