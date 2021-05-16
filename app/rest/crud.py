@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import request
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError, OperationalError
@@ -89,6 +91,8 @@ class EmployeeList(Resource):
         except OperationalError:
             db.session.rollback()
             return {"error": "Incorrect value enter error"}
+        except ValueError:
+            return {"error": "Incorrect value enter error"}
         return employee_schema.dump(new_employee), 201
 
 
@@ -111,6 +115,8 @@ class Employee(Resource):
             db.session.commit()
             return employee_schema.dump(employee)
         except OperationalError:
+            return {"error": "Incorrect data entered"}
+        except ValueError:
             return {"error": "Incorrect data entered"}
 
     def delete(self, employee_id):

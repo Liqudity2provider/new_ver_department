@@ -4,11 +4,11 @@ import requests
 import json
 from flask import render_template, request, redirect, url_for, flash
 
-from app import app, db
+from app import app
 from app.models.models import DepartmentModel, EmployeeModel
 
 
-path = 'http://127.0.0.1:5000'
+path = 'http://127.0.0.1:5000/'
 headers = {'Content-Type': 'application/json'}
 
 

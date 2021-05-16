@@ -8,7 +8,7 @@ class EmployeeModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     related_department_id = db.Column(db.Integer, db.ForeignKey('department.id'))
     name = db.Column(db.String(40))
-    date_of_birth = db.Column(db.Date)
+    date_of_birth = db.Column(db.String)
     salary = db.Column(db.DECIMAL(asdecimal=False, precision=0, decimal_return_scale=0))
 
 
