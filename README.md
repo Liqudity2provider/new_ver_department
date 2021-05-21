@@ -6,3 +6,4 @@
  3. flask run.py
  
  App using endpoints for rest api. Creating, updating and deleting Employees, Departments
+App deploy with Travis CI using flask testing
