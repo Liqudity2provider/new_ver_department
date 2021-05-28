@@ -3,7 +3,7 @@ from flask_testing import TestCase
 
 from app import db
 from config import app_config
-from run import app
+from wsgi import app
 
 app.config.from_object(app_config['test'])
 
