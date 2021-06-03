@@ -7,8 +7,7 @@ from flask import render_template, request, redirect, url_for, flash
 from app import app
 from app.models.models import DepartmentModel, EmployeeModel
 
-
-path = 'http://127.0.0.1:5000/'
+path = 'http://new-departments.herokuapp.com/'
 headers = {'Content-Type': 'application/json'}
 
 
@@ -24,8 +23,8 @@ def add_department_post():
     Flash error throw if department already exist"""
     if request.method == "POST":
         new_department = {
-                'name': request.form['name']
-            }
+            'name': request.form['name']
+        }
         response = requests.post(
             path + '/api/departments',
             headers=headers,
